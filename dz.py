@@ -1,5 +1,4 @@
 import csv
-import math
 
 # Создайте класс студента.
 # ○ Используя дескрипторы проверяйте ФИО на первую заглавную букву и
@@ -12,31 +11,18 @@ import math
 # предмета и по оценкам всех предметов вместе взятых.
 
 class Descriptor():
-    # def __new__(cls, fio):
-    #     safem = super().__new__(cls)
-    #     safem._fio = fio
     def __init__(self, fio):
         self._fio = fio
-        self.tco = 0
+        self.count = 0
         self.check = 0
-    # def __get__(self, obj, type=None):
-    #     return obj._value
-    # def getcount(self):
-    #     self.tco = sum(1 for ch in self._fio if ch.isupper())
-    #     return self.tco
-    # def checkcount(self):
-    #     self.check = sum(1 for ch in self._fio if not ch.isalpha())
-    #     return self.check
     def __set__(self, instance, value):
-        self.tco = sum(1 for ch in value if ch.isupper())
+        self.count = sum(1 for ch in value if ch.isupper())
         self.check = sum(1 for ch in value if not ch.isalpha())
-        # tco = self.getcount()
-        # check = self.checkcount()
         if self.check != 0:
             raise ValueError("Посторонние символы при вводе ФИО!") 
-        if self.tco < 1:
+        if self.count < 1:
             print(f"\nОтсутствует заглавная буква!")
-        elif self.tco > 1:
+        elif self.count > 1:
             print(f"\nЗаглавных букв слишком много!")
         self.value = value
     def __str__(self):
@@ -70,8 +56,9 @@ class Student():
     def __str__(self):
         return f'\nВаш табель, {self.namsurfam}:\n{self.readcard()}'
 
-# fio = input("2. Здравствуйте. Введите, пожалуйста, свои Фамилию Имя Отчество через пробел\n: ")
-fio = 'Marks Bewin Webber'.split()
+fio = input("2. Здравствуйте. Введите, пожалуйста, свои Фамилию Имя Отчество через пробел\n: ")
+fio = fio.split()
+# fio = 'Marks Bewin Webber'.split()
 work = Student()
 for i in range(len(fio)):
     work.namsurfam = fio[i-1]
